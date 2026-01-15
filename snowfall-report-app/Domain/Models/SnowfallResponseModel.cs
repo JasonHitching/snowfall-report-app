@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace snow_report_app.Domain.Models;
+namespace snowfall_report_app.Domain.Models;
 
-public class HistoricalSnowfallModel
+public class SnowfallResponseModel
 {
     public double Latitude { get; set; }
     public double Longitude { get; set; }
@@ -12,9 +12,10 @@ public class HistoricalSnowfallModel
     public string TimezoneAbbreviation { get; set; } = default!;
     public double Elevation { get; set; }
 
-    public DailyUnitsDto DailyUnits { get; set; }
+    [JsonPropertyName("daily_units")]
+    public required DailyUnitsDto DailyUnits { get; set; }
 
-    public DailySnowfallDto Daily { get; set; }
+    public required DailySnowfallDto Daily { get; set; }
 }
 
 public class DailyUnitsDto
