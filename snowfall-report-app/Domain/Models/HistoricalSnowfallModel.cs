@@ -32,5 +32,5 @@ public class DailySnowfallDto
     public List<string> Time { get; set; } = default!;
 
     [JsonPropertyName("snowfall_sum")]
-    public List<string> SnowfallSum { get; set; } = default!;
+    public List<double> SnowfallSum { get; set; } = default!;
 } 

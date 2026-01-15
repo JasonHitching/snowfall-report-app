@@ -14,10 +14,17 @@ class Program
                 // HttpClientFactory
                 services.AddHttpClient<IHistoricalWeatherApiClient, HistoricalWeatherApiClient>(client =>
                 {
-                    client.BaseAddress = new Uri("https://archive-api.open-meteo.com/v1/archive?");
+                    client.BaseAddress = new Uri("https://archive-api.open-meteo.com/");
                 });
+
+                services.AddTransient<TestApi>();
             })
             .Build();
+
+        // Resolve and use TestApi
+        var testApi = host.Services.GetRequiredService<TestApi>();
+
+        await testApi.TestApiCall();
             
        /* using var client = new HttpClient();
 
