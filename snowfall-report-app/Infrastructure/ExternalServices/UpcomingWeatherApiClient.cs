@@ -7,9 +7,24 @@ public class UpcomingWeatherApiClient(HttpClient httpClient) : IUpcomingWeatherA
 {
     private readonly HttpClient _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
-    public async Task<SnowfallResponseModel?> GetUpcoming16DaySnowfallAsync()
+    // <inheritdoc />
+    public async Task<SnowfallResponseModel?> GetUpcoming16DaySnowfallAsync(double latitude, double longitude)
     {
-        var response = await _httpClient.GetFromJsonAsync<SnowfallResponseModel>("v1/forecast?latitude=41.8383&longitude=23.4885&daily=snowfall_sum,snow_depth_max&forecast_days=16");
-        return response;
+        try 
+        {
+            var response = await _httpClient.GetFromJsonAsync<SnowfallResponseModel>($"v1/forecast?latitude={latitude}&longitude={longitude}&daily=snowfall_sum,snow_depth_max&forecast_days=16");
+            
+            return response;
+        }
+        catch (OperationCanceledException cancelledEx) 
+        {
+            Console.WriteLine($"{cancelledEx}");
+            return null;
+        }
+        catch (Exception ex) 
+        {
+            Console.WriteLine("Exception thrown whilst fetching data", ex);
+            return null;
+        }
     }
 }

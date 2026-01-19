@@ -11,9 +11,10 @@ public class SnowfallController(IUpcomingWeatherApiClient upcomingWeatherApiClie
     private readonly IUpcomingWeatherApiClient upcomingWeatherApiClient = upcomingWeatherApiClient;
 
     [HttpGet("upcoming")]
-    public async Task<ActionResult<SnowfallResponseModel>> GetUpcomingSnowfallAsync()
+    public async Task<ActionResult<SnowfallResponseModel>> GetUpcomingSnowfallAsync(
+        [FromQuery] double latitude, [FromQuery] double longitude)
     {
-        var response = await upcomingWeatherApiClient.GetUpcoming16DaySnowfallAsync();
+        var response = await upcomingWeatherApiClient.GetUpcoming16DaySnowfallAsync(latitude: latitude, longitude: longitude);
 
         if (response is null) return NotFound();
 
