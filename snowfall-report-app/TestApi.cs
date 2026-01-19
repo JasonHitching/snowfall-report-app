@@ -18,7 +18,7 @@ namespace snowfall_report_app
 
         public async Task<SnowfallResponseModel?> TestUpcomingHistoricalFetch()
         {
-            var response = await upcomingWeatherApiClient.GetUpcomingWeatherAsync();
+            var response = await upcomingWeatherApiClient.GetUpcoming16DaySnowfallAsync();
 
             return response;
         }

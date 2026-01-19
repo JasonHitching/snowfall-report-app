@@ -34,4 +34,7 @@ public class DailySnowfallDto
 
     [JsonPropertyName("snowfall_sum")]
     public List<double> SnowfallSum { get; set; } = default!;
+
+    [JsonPropertyName("snow_depth_max")]
+    public List<double> SnowfallDepthMax { get; set; } = default!;
 } 

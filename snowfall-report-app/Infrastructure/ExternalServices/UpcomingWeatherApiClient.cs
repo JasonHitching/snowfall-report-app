@@ -7,10 +7,9 @@ public class UpcomingWeatherApiClient(HttpClient httpClient) : IUpcomingWeatherA
 {
     private readonly HttpClient _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
 
-    public async Task<SnowfallResponseModel?> GetUpcomingWeatherAsync()
+    public async Task<SnowfallResponseModel?> GetUpcoming16DaySnowfallAsync()
     {
-        var response = await _httpClient.GetFromJsonAsync<SnowfallResponseModel>("v1/forecast?latitude=41.8&longitude=23.49&daily=snowfall_sum");
-    
+        var response = await _httpClient.GetFromJsonAsync<SnowfallResponseModel>("v1/forecast?latitude=41.8383&longitude=23.4885&daily=snowfall_sum,snow_depth_max&forecast_days=16");
         return response;
     }
 }
